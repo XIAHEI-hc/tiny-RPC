@@ -1,0 +1,36 @@
+syntax = "proto3";
+option cc_generic_services =true;
+
+// It seems 'CC_generic_services' is a typo or an old option from proto2.
+// In proto3, you don't need this option anymore.
+// option CC_generic_services = true;
+
+message MakeOrderRequest {
+  int32 price = 1;
+  string goods = 2;
+}
+
+message MakeOrderResponse {
+  int32 ret_code = 1;
+  string res_info = 2;
+  string order_id = 3;
+}
+
+message QueryOrderRequest {
+  string order_id = 1;
+}
+
+message QueryOrderResponse {
+  int32 ret_code = 1;
+  string res_info = 2;
+  string order_id = 3;
+  int32 price = 4;
+  string goods = 5;
+}
+
+service OrderService {
+  // RPC method name
+  rpc MakeOrder(MakeOrderRequest) returns (MakeOrderResponse);
+  // RPC method name
+  rpc QueryOrder(QueryOrderRequest) returns (QueryOrderResponse);
+}
